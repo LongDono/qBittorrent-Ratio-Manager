@@ -17,7 +17,7 @@ class QBitController:
         try:
             if username and password:
                 r = QBitController.qbit_session.post(QBitController.qbit_url + "auth/login", data = {'username':username, 'password':password})
-                
+
                 if r.status_code == 403:
                     print("Your qbittorrent has banned your IP for too many login attempts. Restart qbittorrent to fix this")
                     sys.exit(1)
@@ -53,8 +53,8 @@ class QBitController:
         if delete_files:
             delete_files_string = "true"
         hashes_to_delete_string = '|'.join(torrent_hashes)
-        QBitController.get("torrents/delete?hashes=" + hashes_to_delete_string + "&deleteFiles=" + delete_files_string)
-#    print("Preview only - Not Removing/Deleting Torrents - To disable, uncomment resources/QBitController.py line 56")
+#        QBitController.get("torrents/delete?hashes=" + hashes_to_delete_string + "&deleteFiles=" + delete_files_string)
+    print("Preview only - Not Removing/Deleting Torrents - To disable, uncomment resources/QBitController.py line 56")
 
     @staticmethod
     def get_torrents_by_category(category):
