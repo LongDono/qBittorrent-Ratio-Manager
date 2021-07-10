@@ -105,3 +105,4 @@ venv.bak/
 
 # .qman config files
 *.qman
+configs/

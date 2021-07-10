@@ -11,6 +11,7 @@ from jsonschema import ValidationError
 from resources.CategoryProfile import CategoryProfile
 from resources.QBitController import QBitController
 
+print("Checking settings...")
 
 qman_schema = {
     "type" : "object",
@@ -74,8 +75,7 @@ def load_category_files_into_classes(args):
                 print("Error while parsing '" + file + "'. custom_delete_files_path: specified path is not a valid directory")
                 sys.exit(1)
             settings['delete_files'] = False # Override delete_files if custom_delete_files_path is set
-
-        categoryProfile = CategoryProfile(settings['category'], settings['tracker'], settings['delete_files'], settings['custom_delete_files_path'], settings['public'], settings['private'])
+        categoryProfile = CategoryProfile(settings['category'], settings['tracker'], settings['delete_files'], settings['custom_delete_files_path'], settings['public'], settings['private'], file)
 
         if settings['category'] not in categoryProfiles:
             categoryProfiles[settings['category']] = []
@@ -113,11 +113,15 @@ if __name__ == "__main__":
     level = levels[min(2, args.verbose)]
     logging.basicConfig(level=level)
 
+    print("Connecting...")
+
     QBitController.connect_to_qbit(args.qbit_url, args.qbit_username, args.qbit_password)
 
     categoryProfiles = load_category_files_into_classes(args)
 
     torrents = QBitController.get_torrents()
+
+    print("Checking torrents...")
 
     delete_counter = 0
     torrents_checked = set()
@@ -136,5 +140,5 @@ if __name__ == "__main__":
             categoryProfile.delete_torrents_to_be_deleted()
             delete_counter += len(categoryProfile.torrents_to_delete)
 
-    print("Checked " + str(len(torrents_checked)) + " torrents!")
-    print("Deleted " + str(delete_counter) + " torrents!")
+    print("Tasks complete.")
+    print(str(len(torrents_checked)) + " torrents checked, " + str(delete_counter) + " torrents deleted")

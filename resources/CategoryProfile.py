@@ -8,13 +8,14 @@ import resources.Helper as Helper
 
 class CategoryProfile:
 
-    def __init__(self, category, tracker, delete_files, custom_delete_files_path, public_settings_array, private_settings_array):
+    def __init__(self, category, tracker, delete_files, custom_delete_files_path, public_settings_array, private_settings_array, qman_file):
         self.category = category
         self.tracker = tracker
         self.delete_files = delete_files
         self.custom_delete_files_path = custom_delete_files_path
         self.public = public_settings_array
         self.private = private_settings_array
+        self.qman_file = qman_file
         self.torrents_to_delete = {}
 
     def delete_files_directly(self):
@@ -64,12 +65,16 @@ class CategoryProfile:
             if not torrent_path:
                 print("Could not extract path for torrent: " + torrent['name'])
                 return
+            print(torrent['name'] + " matches " + self.qman_file)
             self.torrents_to_delete[torrent['hash']] = torrent_path
 
 
     def delete_torrents_to_be_deleted(self):
         if self.torrents_to_delete:
-            logging.info('Deleting following torrents from the {} category'.format(self.category))
+            print("Waiting 10 seconds before deleting torrents... Press Ctrl-c now to cancel"
+            sleep 10
+ #           logging.info('Deleting following torrents from the {} category'.format(self.category))
+            print("Deleting torrents:")
             for name in self.torrents_to_delete.values():
                 logging.info(name)
 

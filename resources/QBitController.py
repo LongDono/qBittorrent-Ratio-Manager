@@ -54,6 +54,7 @@ class QBitController:
             delete_files_string = "true"
         hashes_to_delete_string = '|'.join(torrent_hashes)
         QBitController.get("torrents/delete?hashes=" + hashes_to_delete_string + "&deleteFiles=" + delete_files_string)
+#    print("Preview only - Not Removing/Deleting Torrents - To disable, uncomment resources/QBitController.py line 56")
 
     @staticmethod
     def get_torrents_by_category(category):
