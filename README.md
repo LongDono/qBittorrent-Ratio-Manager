@@ -1,8 +1,8 @@
 # Fork Changes
-- Clearer text indicating what's happen 
-- Displays which qman file that matches torrents about to be deleted
-- If torrents to be deleted, wait 10 seconds before deleting so that the script can be cancelled (helpful when run manually during testing of qman files)
-
+- Clearer text indicating what's happening
+- Displays which qman file is causing torrents to be deleted
+- For torrents to be deleted, waits 10 seconds before deleting so that the script can be cancelled (helpful when run manually during testing of qman files)
+- Default configuration will not delete files without a manual file edit (script will display this when run)
 
 # qBittorrent Ratio Manager
 Reads .qman files for JSON settings on when and how to delete torrents from a qBittorrent client
