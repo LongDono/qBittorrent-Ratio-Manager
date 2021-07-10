@@ -2,6 +2,7 @@ import os
 import shutil
 import logging
 import pathlib
+import time
 from resources.QBitController import QBitController
 import resources.Helper as Helper
 
@@ -71,9 +72,9 @@ class CategoryProfile:
 
     def delete_torrents_to_be_deleted(self):
         if self.torrents_to_delete:
-            print("Waiting 10 seconds before deleting torrents... Press Ctrl-c now to cancel"
-            sleep 10
- #           logging.info('Deleting following torrents from the {} category'.format(self.category))
+            print("Waiting 10 seconds before deleting torrents... Press Ctrl-c now to cancel")
+            time.sleep(10)
+#            logging.info('Deleting following torrents from the {} category'.format(self.category))
             print("Deleting torrents:")
             for name in self.torrents_to_delete.values():
 #                logging.info(name)
