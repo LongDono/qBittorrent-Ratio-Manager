@@ -72,15 +72,11 @@ class CategoryProfile:
 
     def delete_torrents_to_be_deleted(self):
         if self.torrents_to_delete:
-            print("Waiting 10 seconds before deleting torrents... Press Ctrl-c now to cancel")
-            time.sleep(10)
-#            logging.info('Deleting following torrents from the {} category'.format(self.category))
-            print("Deleting torrents:")
+            print("Waiting 5 seconds before deleting torrents... Press Ctrl-c now to cancel")
+            time.sleep(5)
             for name in self.torrents_to_delete.values():
-#                logging.info(name)
-                 print (name)
+                print ("Deleting: "+name)
+                QBitController.remove_torrent_hashes(self.torrents_to_delete.keys(), self.delete_files)
 
-            QBitController.remove_torrent_hashes(self.torrents_to_delete.keys(), self.delete_files)
-
-            if self.custom_delete_files_path:
-                self.delete_files_directly()
+                if self.custom_delete_files_path:
+                    self.delete_files_directly()
